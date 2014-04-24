@@ -11,6 +11,11 @@ env_dir=$3
 
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
 
+echo ${build_dir}
+echo ${cache_dir}
+echo ${env_dir}
+echo ${bp_dir}
+
 # Load some convenience functions like status(), echo(), and indent()
 source $bp_dir/bin/common.sh
 
@@ -92,6 +97,9 @@ fi
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
   npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
+
+  #install casperjs
+  npm install -g casperjs
 )
 
 # Persist goodies like node-version in the slug
@@ -137,7 +145,8 @@ fi
 # Update the PATH
 status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
-echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
+# add in phantomjs to path
+echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:$HOME/vendor/node/lib/node_modules/casperjs/node_modules/phantomjs/lib/phantom/bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.

@@ -1,3 +1,5 @@
+EDIT: added casperjs to build pack
+
 Heroku Buildpack for Node.js
 ============================
 
