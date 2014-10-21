@@ -147,7 +147,7 @@ fi
 status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 # add in phantomjs to path
-echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:$HOME/vendor/node/lib/node_modules/casperjs/node_modules/phantomjs/lib/phantom/bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
+echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:$HOME/vendor/node/lib/node_modules/casperjs/node_modules/phantomjs/lib/phantom/bin:\$HOME/vendor/node/lib/node_modules/slimerjs/bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
